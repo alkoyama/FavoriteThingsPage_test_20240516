@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guestbook</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="script.js"></script> 
+    <link rel="stylesheet" href="../CSS/好きなことサイト.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <script src="../JS/anime.min.js" defer></script>
+    <script src="../JS/好きなことサイト.js" defer></script>
+
+    <style>
+        .message-container {
+          width:500px;
+          margin-top:20px;
+          margin-bottom: 20px;
+          padding: 15px;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          background-color: aquamarine;
+        }
+        .message-container h3 {
+          color: #333;
+          font-size: 20px;
+          margin-bottom: 10px;
+        }
+        .message-container p {
+          color: #666;
+          font-size: 16px;
+        }
+
+        .intro{
+          display: flex;
+          flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+
+  <div class="header_container">
+    <div class="header">
+      <div class="header_text1">
+        <a href="../好きなことサイト.html">メダカの魅力</a><br>
+      </div>
+      <div class="header_text2">～シンプルで奥深い世界～<br>
+        <a href="./guestbook/guestbook.html"><img src="../images/fukidashi_bw10.png" width="auto" height="40px"></a>
+        <a href="your_desired_link2.html"><img src="../images/fish_medaka_character.png" width="auto" height="30px"></a>
+        
+      </div>
+    </div>
+
+
+
+    <div class="marquee">
+      <div class="header_float_image1"><img src="../images/fish_umishida_edited.png" width="auto" height="100px"></div>
+      <span><img src="../images/fish_medaka_character.png" width="auto" height="30px">
+        <img src="../images/fish_medaka_character.png" width="auto" height="30px">&nbsp;&nbsp;
+        <img src="../images/fish_medaka_character.png" width="auto" height="30px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="../images/fish_medaka_character.png" width="auto" height="30px">&nbsp;&nbsp;&nbsp;
+        <img src="../images/fish_medaka_character.png" width="auto" height="30px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="../images/fish_medaka_character.png" width="auto" height="30px">
+        <br>
+        &nbsp;&nbsp;<img src="../images/fish_medaka_character.png" width="auto" height="30px">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="../images/fish_medaka_character.png" width="auto" height="30px">
+      </span>
+
+      <div class="header_float_image2"><img src="../images/fish_umishida.png" width="auto" height="90px"></div>
+
+    </div>
+  </div>
+
+  <div class="intro">
+
+    <h1>コメント投稿フォーム</h1>
+    <form method="post" action="process.php">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" required><br><br>
+      <label for="subject">subject:</label>
+      <select name="subject">
+        <option value="">--Please choose an option--</option>
+        <option value="梅田さん">梅田さん</option>
+        <option value="奥崎さん">奥崎さん</option>
+        <option value="小山明さん">小山明さん</option>
+        <option value="小山由さん">小山由さん</option>
+        <option value="錦さん">錦さん</option>
+        <option value="西口さん">西口さん</option>
+        <option value="西崎さん">西崎さん</option>
+        <option value="平山さん">平山さん</option>
+        <option value="向平さん">向平さん</option>
+        <option value="村山さん">村山さん</option>
+        <option value="和田さん">和田さん</option>
+      </select><br><br>
+      <label for="email">Email Address:</label>
+      <input type="email" name="email" id="email" required><br><br>
+      <label for="comment">Comment:</label>
+      <textarea name="comment" id="comment" rows="5" cols="30" required></textarea><br><br>
+      <button type="submit">Submit</button>
+    </form>
+  
+    <h1>本日いただいたメッセージ</h1>
+    <div class="messages"></div>
+
+    <nav id="pagination">
+    </nav>
+  
+    <script>
+//hide and show messages
+
+
+
+
+      // This script needs to be included after the form
+      fetch('read.php')
+          .then(response => response.json())
+          .then(data => {
+              // Assuming data.comments contains the comments received from the server
+              document.querySelector(".messages").innerHTML = data.comments;
+          });
+
+
+//navigation
+fetch('read.php') // Replace with the actual URL of your script
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('pagination').innerHTML = data.pagination;
+    });
+
+    //const showMoreButton = document.getElementById('show-more');
+    //const commentsContainer = document.querySelector('.messages'); // Use querySelector for class
+
+    //showMoreButton.addEventListener('click', function() {
+      //commentsContainer.classList.toggle('show'); // Assuming a CSS class for visibility
+      // or
+      // commentsContainer.style.display = commentsContainer.style.display === 'none' ? 'block' : 'none';
+    //});
+
+    </script>
+
+  </div>
+</body>
+</html>

@@ -65,4 +65,4 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['comment
   document.querySelector('.messages').innerHTML = `<?php echo $messages; ?>`;
 </script>
 
-<a href="index.html">戻る</a>
+<a href="guestbook.html">戻る</a>
